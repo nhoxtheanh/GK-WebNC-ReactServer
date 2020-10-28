@@ -3,13 +3,13 @@ import { FileAddOutlined } from "@ant-design/icons";
 import { Button, Card } from "antd";
 import axios from "axios";
 import React, { useState,useEffect } from "react";
+const APIURL = process.env.REACT_APP_APIURL;
 
 const Board = function () {
   let [responseData,setResponseData] = useState([]);
-
   useEffect(()=>{
     axios
-    .get("http://localhost:8080/homeDashboard")
+    .get(APIURL)
     .then(function (response) {
       setResponseData(response.data);
     })
