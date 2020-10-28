@@ -1,40 +1,36 @@
 import "./index.css";
 import { FileAddOutlined } from "@ant-design/icons";
 import { Button, Card } from "antd";
-
-const response = [
-  {
-    ownerID: "1",
-    isActive: true,
-    _id: "5f98622f4e8ad9249428a134",
-    name: "Board 1",
-    createdAt: 1603822127918,
-    boardID: 1,
-    __v: 0,
-  },
-  {
-    ownerID: "1",
-    isActive: true,
-    _id: "5f98de9bd735c30ce872d9ad",
-    name: "Board 2 User 1",
-    createdAt: 1603853979316,
-    boardID: 2,
-    __v: 0,
-  },
-];
+import axios from "axios";
+import React, { useState,useEffect } from "react";
 
 const Board = function () {
+  let [responseData,setResponseData] = useState([]);
+
+  useEffect(()=>{
+    axios
+    .get("http://localhost:8080/homeDashboard")
+    .then(function (response) {
+      setResponseData(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  },[]);
+
   const renderBoard = function () {
     let boards = [];
-    response.forEach((item) => {
+    responseData.forEach((item) => {
       boards.push(
         <Card className="card" title="Board 1">
           <p>{item.name}</p>
         </Card>
       );
     });
+    console.log(responseData)
     return boards;
   };
+
   return (
     <div>
       <div className="cards">
