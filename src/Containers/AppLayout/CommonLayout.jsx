@@ -3,7 +3,7 @@ import React, { memo } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 
-const CommonLayout = ({ children }) => (
+export const CommonLayout = ({ children }) => (
     <div className="commonLayout">
         <Header />
             {children}

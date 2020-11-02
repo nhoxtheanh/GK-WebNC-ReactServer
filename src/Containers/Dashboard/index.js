@@ -1,34 +1,47 @@
-import React from 'react';
-import CommonLayout from '../AppLayout';
+import React, { useState, useEffect } from "react";
+import CommonLayout from "../AppLayout/CommonLayout";
+import { FileAddOutlined } from "@ant-design/icons";
+import { Button } from "antd";
+import axios from "axios";
 //import Title from 'app/components/Title';
-//import AddBoardButton from 'app/components/AddBoardButton';
-import Board from '../../Components/Boards';
+import Board from "../../Components/Boards";
 // import { StyledDashboard } from './styles';
 
-import moment from 'moment';
-// import { useInjectReducer, useInjectSaga } from 'utils/reduxInjectors';
-// import { sliceKey, reducer } from './slice';
-// import saga from './saga';
+import moment from "moment";
 // import useHooks from './hooks';
+const APIURL = process.env.REACT_APP_APIURL;
 
-const Dashboard = props => {
-  // useInjectSaga({ key: sliceKey, saga });
-  // useInjectReducer({ key: sliceKey, reducer });
+const Dashboard = (props) => {
   // const { handlers, selectors } = useHooks();
-  const { boards } = {};////////// gọi API lấy boardslist ở đây
+
+  let [boards, setBoards] = useState([]);
+  useEffect(() => {// gọi API lấy tất cả boards
+    axios
+      .get(APIURL + "/homeDashboard")
+      .then(function (response) {
+        setBoards(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <CommonLayout>
-        <div className="list">
-          {/* <AddBoardButton /> */}
-          {boards.map(({ _id, name, createAt }) => (
+      <div className="dashboardPage">
+        <Button className="add-button">
+          <FileAddOutlined /> <span>Add board</span>
+        </Button>
+        <div className="boardsList">
+          {boards.map(({ _id, name, createdAt }) => (
             <Board
               key={_id}
               name={name}
-              time={moment(createAt).format('D MMMM')}
+              time={moment(createdAt).format("D MMMM")}
             />
           ))}
         </div>
+      </div>
     </CommonLayout>
   );
 };

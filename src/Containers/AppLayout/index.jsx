@@ -4,10 +4,10 @@ import Dashboard from '../Dashboard';
 
 export const AppLayout = props => (
   <Switch>
-    <Route path="/dashboard">
+    <Route path="/dashboard"> {/* khai báo route khi truy cập đến URL /dashboard */}
       <Dashboard />
     </Route>
-    <Redirect to="/dashboard" />
+    <Redirect to="/dashboard" /> {/* khi vào trang ko xác định sẽ redirect về /dashboard */}
   </Switch>
 );
 
