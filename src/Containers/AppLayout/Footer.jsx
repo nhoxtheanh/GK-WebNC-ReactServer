@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 
 export const Footer = () => {
-  return <div>The Anh 2020</div>;
+  return <footer>The Anh 2020</footer>;
 };
 
 export default memo(Footer);

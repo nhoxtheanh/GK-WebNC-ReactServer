@@ -15,7 +15,8 @@ const Dashboard = (props) => {
   // const { handlers, selectors } = useHooks();
 
   let [boards, setBoards] = useState([]);
-  useEffect(() => {// gọi API lấy tất cả boards
+  useEffect(() => {
+    // gọi API lấy tất cả boards
     axios
       .get(APIURL + "/homeDashboard")
       .then(function (response) {
