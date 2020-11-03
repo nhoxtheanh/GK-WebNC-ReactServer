@@ -48,12 +48,12 @@ const Dashboard = (props) => {
         </Button>
         <div className="boardsList">
           {boards.length ? (
-            boards.map(({ _id, name, createdAt }) => (
+            boards.map(({ _id, name, createdAt, isActive }) => ( isActive ?
               <Board
                 key={_id}
                 name={name}
                 time={moment(createdAt).format("D MMMM")}
-              />
+              /> : null
             ))
           ) : (
             <Alert variant="warning">
