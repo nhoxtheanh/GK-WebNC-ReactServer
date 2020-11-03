@@ -64,11 +64,15 @@ footer {
   padding: 15px;
   margin: auto;
 }
+.loginPage .social-login {
+  display: flex;
 
+  justify-content: space-around;
+}
 .loginPage .social-btn {
   font-weight: 100;
   color: white;
-  width: 190px;
+  width: 160px;
   font-size: 0.9rem;
 }
 
@@ -102,9 +106,9 @@ footer {
   justify-content: center;
 }
 
-/* register page */
+/* signup page */
 
-.registerPage {
+.signupPage {
   width: 412px;
   margin: 10vh auto;
   background-color: #f3f3f3;
@@ -112,46 +116,46 @@ footer {
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.registerPage form {
+.signupPage form {
   width: 100%;
   max-width: 410px;
   padding: 15px;
   margin: auto;
 }
 
-.registerPage .social-btn {
+.signupPage .social-btn {
   font-weight: 100;
   color: white;
   width: 190px;
   font-size: 0.9rem;
 }
 
-.registerPage button[type="submit"] {
+.signupPage button[type="submit"] {
   margin-top: 10px;
 }
 
-.registerPage .facebook-btn {
+.signupPage .facebook-btn {
   background-color: #3c589c;
 }
 
-.registerPage .google-btn {
+.signupPage .google-btn {
   background-color: #df4b3b;
 }
-.registerPage input {
+.signupPage input {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
 
-.registerPage .svg-inline--fa.icon {
+.signupPage .svg-inline--fa.icon {
   margin-right: 0.5rem;
 }
 
-.registerPage .btn-login,
-.registerPage .btn-signup {
+.signupPage .btn-login,
+.signupPage .btn-signup {
   width: 15rem;
 }
 
-.registerPage .btn-container {
+.signupPage .btn-container {
   display: flex;
   justify-content: center;
 }

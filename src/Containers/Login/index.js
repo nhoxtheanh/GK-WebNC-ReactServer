@@ -3,6 +3,8 @@ import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignInAlt, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { faFacebookSquare, faGoogle } from "@fortawesome/free-brands-svg-icons";
+import axios from "axios";
+const APIURL = process.env.REACT_APP_APIURL;
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
@@ -13,8 +15,19 @@ export default function LoginPage() {
   }
 
   function handleSubmit(event) {
-    //event.preventDefault();
-    alert(username + password); ////////TODO : ở đây sẽ tự hiện gọi api đến login
+    event.preventDefault();
+    axios
+      .post(APIURL + "/users/login", {
+        username: username,
+        password: password,
+      })
+      .then(function (response) {
+        if (response.data.status === 1) window.location.href = "/dashboard";
+        else alert(response.data.msg);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   return (
@@ -24,14 +37,12 @@ export default function LoginPage() {
         <div class="social-login">
           <Button className="btn facebook-btn social-btn" type="button">
             <span>
-              <FontAwesomeIcon className="icon" icon={faFacebookSquare} /> Sign
-              in with Facebook
+              <FontAwesomeIcon className="icon" icon={faFacebookSquare} /> with Facebook
             </span>
           </Button>
           <Button className="btn google-btn social-btn" type="button">
             <span>
-              <FontAwesomeIcon className="icon" icon={faGoogle} /> Sign in with
-              Google
+              <FontAwesomeIcon className="icon" icon={faGoogle} /> with Google
             </span>
           </Button>
         </div>
@@ -66,10 +77,12 @@ export default function LoginPage() {
         </div>
         <hr></hr>
         <div className="btn-container">
-          <Button className="btn btn-primary btn-block btn-signup">
-            <FontAwesomeIcon className="icon" icon={faUserPlus} /> Sign up New
-            Account
-          </Button>
+          <a href="/signup">
+            <Button className="btn btn-primary btn-block btn-signup">
+              <FontAwesomeIcon className="icon" icon={faUserPlus} /> Sign up New
+              Account
+            </Button>
+          </a>
         </div>
       </form>
     </div>

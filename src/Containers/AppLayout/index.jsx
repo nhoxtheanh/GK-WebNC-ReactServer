@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { Redirect, Switch, Route } from 'react-router-dom';
 import Dashboard from '../Dashboard';
 import LoginPage from '../Login';
-import RegisterPage from '../Register';
+import SignupPage from '../Signup';
 
 export const AppLayout = props => (
   <Switch>
@@ -12,8 +12,8 @@ export const AppLayout = props => (
     <Route path="/login">
       <LoginPage />
     </Route>
-    <Route path="/register">
-      <RegisterPage />
+    <Route path="/signup">
+      <SignupPage />
     </Route>
     <Redirect to="/login" /> {/* khi vào trang ko xác định sẽ redirect về /dashboard */}
   </Switch>
