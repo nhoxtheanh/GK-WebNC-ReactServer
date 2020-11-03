@@ -22,7 +22,11 @@ export default function LoginPage() {
         password: password,
       })
       .then(function (response) {
-        if (response.data.status === 1) window.location.href = "/dashboard";
+        if (response.data.status === 1) {
+          localStorage.setItem("jwtToken", response.data.token);
+          localStorage.setItem("fullname", response.data.fullname);
+          window.location.href = "/dashboard";
+        }
         else alert(response.data.msg);
       })
       .catch(function (error) {

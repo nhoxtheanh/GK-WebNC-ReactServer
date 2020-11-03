@@ -4,6 +4,12 @@ import Navbar from 'react-bootstrap/Navbar'
 import {Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstrap'
 
 export const Header = () => {
+  let fullname = localStorage.getItem("fullname");
+  function logout(){
+    localStorage.setItem("jwtToken", "invalid token :))");
+    localStorage.setItem("fullname", "Hổng biết");
+  }
+
   return (
     <header>
       <Navbar bg="light" expand="lg">
@@ -21,10 +27,12 @@ export const Header = () => {
               <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
             </NavDropdown>
           </Nav>
-          <Form inline>
+          <Form inline className="searchForm input-group col-lg-4">
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
             <Button variant="outline-success">Search</Button>
           </Form>
+          <div className="greeting">Chào <b>{fullname}</b></div>
+          <a href="/login"><Button variant="info" onClick={logout}>Đăng xuất</Button></a>
         </Navbar.Collapse>
       </Navbar>
       <br/>

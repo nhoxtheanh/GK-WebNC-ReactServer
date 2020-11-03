@@ -7,6 +7,7 @@ import Board from "../../Components/Boards";
 // import { StyledDashboard } from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import Alert from 'react-bootstrap/Alert'
 
 import moment from "moment";
 // import useHooks from './hooks';
@@ -19,7 +20,7 @@ const Dashboard = (props) => {
   useEffect(() => {
     // gọi API lấy tất cả boards
     axios
-      .get(APIURL + "/homeDashboard")
+      .get(APIURL + "/homeDashboard", { headers: { Authorization:localStorage.getItem('jwtToken') } })
       .then(function (response) {
         setBoards(response.data);
       })
@@ -39,13 +40,13 @@ const Dashboard = (props) => {
           <span>Add board</span>
         </Button>
         <div className="boardsList">
-          {boards.map(({ _id, name, createdAt }) => (
+          {boards.length ? boards.map(({ _id, name, createdAt }) => (
             <Board
               key={_id}
               name={name}
               time={moment(createdAt).format("D MMMM")}
             />
-          ))}
+          )) : <Alert variant="warning"><br></br><br></br><br></br>←&nbsp;click&nbsp;to&nbsp;create&nbsp;your&nbsp;first&nbsp;board</Alert>}
         </div>
       </div>
     </CommonLayout>
