@@ -1,5 +1,6 @@
-.ant-card.ant-card-bordered.card {
-  width: 200px;
+.dashboardPage,
+.boardsList .card {
+  width: 18rem;
   margin-right: 20px;
 }
 
@@ -8,9 +9,11 @@
   display: flex;
 }
 
-.dashboardPage .ant-btn.add-button {
-  width: 200px;
-  height: 140px;
+.dashboardPage { margin: 2rem;}
+
+.dashboardPage .add-button {
+  min-width: 13.125rem;
+  height: 13.125rem;
   margin-right: 20px;
 }
 
@@ -19,4 +22,25 @@ footer {
   position: absolute;
   bottom: 0;
   left: 50vw;
+}
+
+
+.btn-circle.btn-xl {
+  width: 70px;
+  height: 70px;
+  padding: 10px 16px;
+  border-radius: 35px;
+  font-size: 24px;
+  line-height: 1.33;
+  color: white;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  padding: 6px 0px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.42857;
 }

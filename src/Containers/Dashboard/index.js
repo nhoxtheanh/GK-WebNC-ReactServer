@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import CommonLayout from "../AppLayout/CommonLayout";
-import { FileAddOutlined } from "@ant-design/icons";
-import { Button } from "antd";
+import { Card, Button } from "react-bootstrap";
 import axios from "axios";
 //import Title from 'app/components/Title';
 import Board from "../../Components/Boards";
 // import { StyledDashboard } from './styles';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 import moment from "moment";
 // import useHooks from './hooks';
@@ -30,8 +31,12 @@ const Dashboard = (props) => {
   return (
     <CommonLayout>
       <div className="dashboardPage">
-        <Button className="add-button">
-          <FileAddOutlined /> <span>Add board</span>
+        <Button variant="outline-warning" className="add-button">
+          <button type="button-add-icon" class="btn btn-warning btn-circle btn-xl">
+            <FontAwesomeIcon icon={faPlus} />
+          </button>
+          <br></br>
+          <span>Add board</span>
         </Button>
         <div className="boardsList">
           {boards.map(({ _id, name, createdAt }) => (
