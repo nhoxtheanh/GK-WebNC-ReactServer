@@ -9,7 +9,9 @@
   display: flex;
 }
 
-.dashboardPage { margin: 2rem;}
+.dashboardPage {
+  margin: 2rem;
+}
 
 .dashboardPage .add-button {
   min-width: 13.125rem;
@@ -17,13 +19,11 @@
   margin-right: 20px;
 }
 
-
 footer {
   position: absolute;
   bottom: 0;
   left: 50vw;
 }
-
 
 .btn-circle.btn-xl {
   width: 70px;
@@ -43,4 +43,115 @@ footer {
   text-align: center;
   font-size: 12px;
   line-height: 1.42857;
+}
+
+/* login page */
+.text-center {
+  text-align: center;
+}
+
+.loginPage {
+  width: 412px;
+  margin: 10vh auto;
+  background-color: #f3f3f3;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.loginPage form {
+  width: 100%;
+  max-width: 410px;
+  padding: 15px;
+  margin: auto;
+}
+
+.loginPage .social-btn {
+  font-weight: 100;
+  color: white;
+  width: 190px;
+  font-size: 0.9rem;
+}
+
+.loginPage button[type="submit"] {
+  margin-top: 10px;
+}
+
+.loginPage .facebook-btn {
+  background-color: #3c589c;
+}
+
+.loginPage .google-btn {
+  background-color: #df4b3b;
+}
+.loginPage input {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.loginPage .svg-inline--fa.icon {
+  margin-right: 0.5rem;
+}
+
+.loginPage .btn-login,
+.loginPage .btn-signup {
+  width: 15rem;
+}
+
+.loginPage .btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+/* register page */
+
+.registerPage {
+  width: 412px;
+  margin: 10vh auto;
+  background-color: #f3f3f3;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.registerPage form {
+  width: 100%;
+  max-width: 410px;
+  padding: 15px;
+  margin: auto;
+}
+
+.registerPage .social-btn {
+  font-weight: 100;
+  color: white;
+  width: 190px;
+  font-size: 0.9rem;
+}
+
+.registerPage button[type="submit"] {
+  margin-top: 10px;
+}
+
+.registerPage .facebook-btn {
+  background-color: #3c589c;
+}
+
+.registerPage .google-btn {
+  background-color: #df4b3b;
+}
+.registerPage input {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.registerPage .svg-inline--fa.icon {
+  margin-right: 0.5rem;
+}
+
+.registerPage .btn-login,
+.registerPage .btn-signup {
+  width: 15rem;
+}
+
+.registerPage .btn-container {
+  display: flex;
+  justify-content: center;
 }
