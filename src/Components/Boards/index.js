@@ -63,10 +63,14 @@ const Board = function ({ name, time, boardID, isActiveBoard }) {
       });
   }
 
+  function getBoardDetail(boardID) {
+    window.location.href = "/boardDetail/" + boardID;
+  }
+
   return (
     <div>
       {isActive ? (
-        <Card className="card">
+        <Card className="card" border="dark">
           <Card.Body>
             <Card.Title>
               {boardName}
@@ -92,8 +96,13 @@ const Board = function ({ name, time, boardID, isActiveBoard }) {
               Created at {time}
             </Card.Subtitle>
             <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
+              <Button
+                variant="light"
+                className="btn-boardDetail"
+                onClick={() => getBoardDetail(boardID)}
+              >
+                Board Detail
+              </Button>
             </Card.Text>
 
             <Button variant="outline-info" className="btn-shareBoard">

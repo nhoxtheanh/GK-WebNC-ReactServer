@@ -23,12 +23,17 @@
 
 .dashboardPage .btn-editBoard {
   position: relative;
-  float:right;
+  float: right;
 }
 
 .dashboardPage .btn-deleteBoard {
   position: relative;
   float: right;
+}
+
+.dashboardPage .btn-boardDetail {
+  width: 246px;
+  height: 52px;
 }
 
 footer {
@@ -178,4 +183,18 @@ header .searchForm {
 
 header .greeting {
   margin-right: 20px;
+}
+
+
+.boardDetailPage,
+.columnsList .card {
+  width: 30vw;
+  margin: 20px;
+  text-align: center;
+}
+
+.boardDetailPage,
+.columnsList {
+  display: flex;
+  flex-direction: row;
 }
