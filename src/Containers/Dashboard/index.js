@@ -11,7 +11,6 @@ import { Prompt, Alert as AlertModal } from "react-st-modal";
 import Alert from "react-bootstrap/Alert";
 
 import moment from "moment";
-// import useHooks from './hooks';
 const APIURL = process.env.REACT_APP_APIURL;
 
 const Dashboard = (props) => {
@@ -94,15 +93,15 @@ const Dashboard = (props) => {
             <span>Add board</span>
           </Button>
           {boards.length ? (
-            boards.map(({ _id, name, createdAt, isActive }) =>
-              isActive ? (
-                <Board
-                  key={_id}
-                  name={name}
-                  time={moment(createdAt).format("D MMMM")}
-                />
-              ) : null
-            )
+            boards.map(({ _id, name, createdAt, isActive, boardID }) => (
+              <Board
+                key={_id}
+                name={name}
+                time={moment(createdAt).format("D MMMM")}
+                boardID={boardID}
+                isActiveBoard={isActive}
+              />
+            ))
           ) : (
             <Alert variant="warning">
               <br></br>

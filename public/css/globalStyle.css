@@ -12,13 +12,23 @@
 
 .dashboardPage {
   margin: 2rem;
-  width: 100%;
+  width: 97%;
 }
 
 .dashboardPage .add-button {
   min-width: 13.125rem;
   height: 13.125rem;
   margin: 10px;
+}
+
+.dashboardPage .btn-editBoard {
+  position: relative;
+  float:right;
+}
+
+.dashboardPage .btn-deleteBoard {
+  position: relative;
+  float: right;
 }
 
 footer {
