@@ -20,7 +20,7 @@ export const Header = () => {
   return (
     <header>
       <Navbar bg="light" expand="lg">
-        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+        <Navbar.Brand href="/dashboard">React-Bootstrap</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
@@ -38,8 +38,8 @@ export const Header = () => {
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
             <Button variant="outline-success">Search</Button>
           </Form>
-          <div className="greeting">Chào <Button onClick={getProfile}><b>{fullname}</b></Button></div>
-          <a href="/login"><Button variant="info" onClick={logout}>Đăng xuất</Button></a>
+          <div className="greeting">Chào <Button variant="outline-primary" onClick={getProfile}><b>{fullname}</b></Button></div>
+          <a href="/login"><Button variant="info" onClick={logout}>Logout</Button></a>
         </Navbar.Collapse>
       </Navbar>
       <br/>

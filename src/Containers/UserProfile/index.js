@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignInAlt, faUserPlus } from "@fortawesome/free-solid-svg-icons";
+import { faSave, faBackspace } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import "./index.css";
+import Form from "react-bootstrap/Form";
+import CommonLayout from "../AppLayout/CommonLayout";
+import AlertBT from "react-bootstrap/Alert";
 const APIURL = process.env.REACT_APP_APIURL;
 
-export default function UserProfilePage(userID) {
+export default function UserProfilePage({ userID }) {
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
   const [gender, setGender] = useState("");
-  ///const [birthday, setBirtday] = useState(""); /// TODO : xử lý ngày
+  ///const [birthday, setBirthday] = useState(""); /// TODO : xử lý ngày
   const [address, setAddress] = useState("");
 
   useEffect(() => {
@@ -31,31 +35,38 @@ export default function UserProfilePage(userID) {
   }
 
   function validateForm() {
-    return (
-      fullname.length > 0
-    );
+    return fullname.length > 0;
   }
 
   function handleSubmit(event) {
-    // event.preventDefault();
-    // axios
-    //   .post(APIURL + "/users/" + userID, {
-    //     fullname: fullname,
-    //     username: username,
-    //     password: password
-    //   })
-    //   .then(function (response) {
-    //     alert(response.data.msg);
-    //     if(response.data.status === 1)
-    //       window.location.href = "/login";
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
+    event.preventDefault();
+    axios
+      .post(APIURL + "/users/" + userID, {
+        fullname: fullname,
+        email: email,
+        gender: gender,
+        address: address
+      })
+      .then(function (response) {
+        alert(response.data.msg);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  function goBackToDashBoard() {
+    window.location.href = "/dashboard";
+  }
+
+  const checkPermission = () => {
+    return userID == localStorage.getItem("userID");
   }
 
   return (
-    <div className="signupPage">
+    <CommonLayout>
+    <div className="profilePage">
+      {checkPermission() ? (
       <form onSubmit={handleSubmit}>
         <h1 className="h3 mb-3 font-weight-normal text-center">Your Profile</h1>
         <FormGroup controlId="fullname" bsSize="large">
@@ -83,27 +94,40 @@ export default function UserProfilePage(userID) {
         </FormGroup>
         <FormGroup controlId="gender" bsSize="large">
           <FormLabel>Gender</FormLabel>
-          <select value={this.state.value} onChange={(e) => setGender(e.target.value)}>
-            <option value="grapefruit">Male</option>
-            <option value="lime">Female</option>
-          </select>
+          <Form.Control
+            as="select"
+            custom
+            value={gender}
+            onChange={(e) => setGender(e.target.value)}
+          >
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Nam">Nam</option>
+            <option value="Nữ">Nữ</option>
+          </Form.Control>
         </FormGroup>
         <div className="btn-container">
           <Button
-            className="btn btn-success btn-block btn-login"
+            variant="primary"
+            className="buttons"
             disabled={!validateForm()}
             type="submit"
           >
-            <FontAwesomeIcon className="icon" icon={faUserPlus} />
+            <FontAwesomeIcon className="icon" icon={faSave} />
             Save
           </Button>
           <Button
-            className="btn btn-light btn-block btn-login"
+            variant="outline-secondary"
+            className="buttons"
+            onClick={() => goBackToDashBoard()}
           >
-            Cancel
+            <FontAwesomeIcon className="icon" icon={faBackspace} />
+            Back
           </Button>
         </div>
       </form>
+      ) : <div><AlertBT variant="warning">You don't have permission</AlertBT></div> }
     </div>
+    </CommonLayout>
   );
 }
