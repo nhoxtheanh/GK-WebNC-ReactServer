@@ -32,7 +32,7 @@ const Column = function ({ name, color, columnID, isActiveColumn }) {
         }
       )
       .then(function (response) {
-        if (response.data.status === 1) fetchCards();  ////TODO : fetch cards
+        if (response.data.status === 1) fetchCards();
         else {
           alert(response.data.msg.message);
         }
@@ -63,8 +63,7 @@ const Column = function ({ name, color, columnID, isActiveColumn }) {
     <div>
       {isActive ? (
       <div>
-        <Card className="card" bg={ (name == "Action Items") ? 'info' : (name == "To improve") ? 'danger' : 'success'}> 
-        {/* TODO : chỉnh lại màu theo biến color */}
+        <Card className="card" bg={ (color == "blue") ? 'info' : (color == "red") ? 'danger' : (color == "green") ? 'success' : 'light'}>
           <Card.Body>
             <Card.Title>
               {columnName}
@@ -80,6 +79,7 @@ const Column = function ({ name, color, columnID, isActiveColumn }) {
                 cardID={cardID}
                 content={content}
                 isActiveCard={isActive}
+                color={color}
               />
             ))
           ) : (

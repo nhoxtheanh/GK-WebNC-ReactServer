@@ -1,0 +1,16 @@
+
+.boardDetailPage
+.columnsList .card-item .actionButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-bottom: 0.5rem;
+}
+
+.boardDetailPage
+.columnsList .card-item .actionButtons .actionBtn {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  border: 0;
+  background-color: white;
+}

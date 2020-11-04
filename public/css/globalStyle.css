@@ -186,15 +186,28 @@ header .greeting {
 }
 
 
-.boardDetailPage,
+.boardDetailPage
 .columnsList .card {
   width: 30vw;
   margin: 20px;
   text-align: center;
 }
 
-.boardDetailPage,
+.boardDetailPage
 .columnsList {
   display: flex;
   flex-direction: row;
+}
+
+.boardDetailPage
+.columnsList .card-item .actionButtons {
+  display: flex;
+  flex-direction: row;
+}
+
+.boardDetailPage
+.columnsList .card-item .actionButtons .actionBtn {
+  float: right;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
