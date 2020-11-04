@@ -4,10 +4,16 @@ import Dashboard from '../Dashboard';
 import LoginPage from '../Login';
 import SignupPage from '../Signup';
 import BoardDetailPage from '../BoardDetail';
+import UserProfilePage from '../UserProfile';
 
 function BoardDetail() {
   let { boardID } = useParams();
   return <BoardDetailPage boardID={boardID}/>;
+}
+
+function UserProfile() {
+  let { userID } = useParams();
+  return <UserProfilePage userID={userID}/>;
 }
 
 export const AppLayout = props => (
@@ -23,6 +29,9 @@ export const AppLayout = props => (
     </Route>
     <Route path="/boardDetail/:boardID">  {/* khai báo route với param */}
       <BoardDetail/>
+    </Route>
+    <Route path="/users/:userID">
+      <UserProfile/>
     </Route>
     <Redirect to="/login" /> {/* khi vào trang ko xác định sẽ redirect về /dashboard */}
   </Switch>

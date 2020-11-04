@@ -5,9 +5,16 @@ import {Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstrap'
 
 export const Header = () => {
   let fullname = localStorage.getItem("fullname");
+  let userID = localStorage.getItem("userID");
+  
   function logout(){
     localStorage.setItem("jwtToken", "invalid token :))");
     localStorage.setItem("fullname", "Hổng biết");
+    localStorage.setItem("userID", 0);
+  }
+
+  function getProfile(){
+    window.location.href = "/users/" + userID;
   }
 
   return (
@@ -31,7 +38,7 @@ export const Header = () => {
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
             <Button variant="outline-success">Search</Button>
           </Form>
-          <div className="greeting">Chào <b>{fullname}</b></div>
+          <div className="greeting">Chào <Button onClick={getProfile}><b>{fullname}</b></Button></div>
           <a href="/login"><Button variant="info" onClick={logout}>Đăng xuất</Button></a>
         </Navbar.Collapse>
       </Navbar>

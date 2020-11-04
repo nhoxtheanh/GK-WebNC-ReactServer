@@ -25,6 +25,7 @@ export default function LoginPage() {
         if (response.data.status === 1) {
           localStorage.setItem("jwtToken", response.data.token);
           localStorage.setItem("fullname", response.data.fullname);
+          localStorage.setItem("userID", response.data.userID);
           window.location.href = "/dashboard";
         }
         else alert(response.data.msg);
