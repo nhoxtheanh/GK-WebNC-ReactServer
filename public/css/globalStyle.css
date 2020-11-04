@@ -1,22 +1,24 @@
 .dashboardPage,
 .boardsList .card {
   width: 18rem;
-  margin-right: 20px;
+  margin: 10px;
 }
 
 .dashboardPage,
 .boardsList {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .dashboardPage {
   margin: 2rem;
+  width: 100%;
 }
 
 .dashboardPage .add-button {
   min-width: 13.125rem;
   height: 13.125rem;
-  margin-right: 20px;
+  margin: 10px;
 }
 
 footer {
