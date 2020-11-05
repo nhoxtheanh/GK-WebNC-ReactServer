@@ -46,6 +46,7 @@ Frontend:
 - react-icons
 - react-st-modal
 - react-router-dom
+- react-toast-notifications
 
 ### Installation
 

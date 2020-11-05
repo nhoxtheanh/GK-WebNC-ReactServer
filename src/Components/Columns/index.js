@@ -6,9 +6,11 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Prompt, Alert as AlertModal } from "react-st-modal";
 import CardItem from '../Cards'
 import axios from "axios";
+import { useToasts } from 'react-toast-notifications';
 const APIURL = process.env.REACT_APP_APIURL;
 
 const Column = function ({ name, color, columnID, isActiveColumn }) {
+  const { addToast } = useToasts();
   let [columnName, setColumnName] = useState("");
   let [isActive, setIsActive] = useState("");
   let [cards, setCards] = useState([]);
@@ -34,7 +36,10 @@ const Column = function ({ name, color, columnID, isActiveColumn }) {
       .then(function (response) {
         if (response.data.status === 1) fetchCards();
         else {
-          alert(response.data.msg.message);
+          addToast(response.data.msg.message, {
+            appearance: "error",
+            autoDismiss: true,
+          });
         }
       })
       .catch(function (error) {
@@ -50,7 +55,10 @@ const Column = function ({ name, color, columnID, isActiveColumn }) {
       .then(function (response) {
         if (response.data.status === 1) setCards(response.data.cards);
         else {
-          alert(response.data.msg);
+          addToast(response.data.msg, {
+            appearance: "error",
+            autoDismiss: true,
+          });
         }
       })
       .catch(function (error) {

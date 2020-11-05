@@ -7,9 +7,11 @@ import "./index.css";
 import Form from "react-bootstrap/Form";
 import CommonLayout from "../AppLayout/CommonLayout";
 import AlertBT from "react-bootstrap/Alert";
+import { useToasts } from 'react-toast-notifications';
 const APIURL = process.env.REACT_APP_APIURL;
 
 export default function UserProfilePage({ userID }) {
+  const { addToast } = useToasts();
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
   const [gender, setGender] = useState("");
@@ -48,7 +50,10 @@ export default function UserProfilePage({ userID }) {
         address: address
       })
       .then(function (response) {
-        alert(response.data.msg);
+        addToast(response.data.msg, {
+          appearance: 'success',
+          autoDismiss: true,
+        });
       })
       .catch(function (error) {
         console.log(error);

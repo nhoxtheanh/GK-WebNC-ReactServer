@@ -9,13 +9,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Prompt, Alert as AlertModal } from "react-st-modal";
 import Alert from "react-bootstrap/Alert";
-
+import { useToasts } from "react-toast-notifications";
 import moment from "moment";
 const APIURL = process.env.REACT_APP_APIURL;
 
 const Dashboard = (props) => {
-  // const { handlers, selectors } = useHooks();
-
+  const { addToast } = useToasts();
+  // const { handlers, selectors } = useHooks()
   let [boards, setBoards] = useState([]);
   useEffect(() => {
     fetchBoards();
@@ -30,7 +30,10 @@ const Dashboard = (props) => {
       .then(function (response) {
         if (response.data.status === 1) setBoards(response.data.allBoards);
         else {
-          alert("Forbidden Error: You don't have permission!");
+          addToast("Forbidden Error: You don't have permission!", {
+            appearance: "error",
+            autoDismiss: true,
+          });
           window.location.href = "/login";
         }
       })
@@ -54,7 +57,10 @@ const Dashboard = (props) => {
       .then(function (response) {
         if (response.data.status === 1) fetchBoards();
         else {
-          alert(response.data.msg.message);
+          addToast(response.data.msg.message, {
+            appearance: "error",
+            autoDismiss: true,
+          });
         }
       })
       .catch(function (error) {

@@ -4,9 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignInAlt, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useToasts } from 'react-toast-notifications';
 const APIURL = process.env.REACT_APP_APIURL;
 
 export default function SignupPage() {
+  const { addToast } = useToasts();
   const [fullname, setFullname] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -27,7 +29,10 @@ export default function SignupPage() {
         password: password,
       })
       .then(function (response) {
-        alert(response.data.msg);
+        addToast(response.data.msg, {
+          appearance: 'info',
+          autoDismiss: true,
+        });
         if (response.data.status === 1) window.location.href = "/login";
       })
       .catch(function (error) {

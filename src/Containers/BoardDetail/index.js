@@ -9,12 +9,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Prompt, Alert as AlertModal } from "react-st-modal";
 import Alert from "react-bootstrap/Alert";
-
+import { useToasts } from 'react-toast-notifications';
 import moment from "moment";
 const APIURL = process.env.REACT_APP_APIURL;
 
 const BoardDetailPage = function ({ boardID }) {
-
+  const { addToast } = useToasts();
   let [columns, setColumns] = useState([]);
   useEffect(() => {
     fetchColumns();
@@ -28,7 +28,10 @@ const BoardDetailPage = function ({ boardID }) {
       .then(function (response) {
         if (response.data.status === 1) setColumns(response.data.boardDetails);
         else {
-          alert("Forbidden Error: You don't have permission!");
+          addToast("Forbidden Error: You don't have permission!", {
+            appearance: "error",
+            autoDismiss: true,
+          });
         }
       })
       .catch(function (error) {

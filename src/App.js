@@ -1,13 +1,15 @@
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import AppLayout from "./Containers/AppLayout";
-// import Board from "./Pages/Dashboard"
+import { ToastProvider } from "react-toast-notifications";
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
-        {/* <Route path="/notfound" component={NotFoundPage} /> */}
-        <Route component={AppLayout} />
+        <ToastProvider>
+          {/* <Route path="/notfound" component={NotFoundPage} /> */}
+          <Route component={AppLayout} />
+        </ToastProvider>
       </Switch>
     </BrowserRouter>
   );

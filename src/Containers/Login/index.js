@@ -5,9 +5,11 @@ import { faSignInAlt, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { faFacebookSquare, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import axios from "axios";
 import { Link } from 'react-router-dom'
+import { useToasts } from 'react-toast-notifications';
 const APIURL = process.env.REACT_APP_APIURL;
 
 export default function LoginPage() {
+  const { addToast } = useToasts();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -28,7 +30,11 @@ export default function LoginPage() {
           localStorage.setItem("fullname", response.data.fullname);
           localStorage.setItem("userID", response.data.userID);
           window.location.href = "/dashboard";
-        } else alert(response.data.msg);
+        } else 
+        addToast(response.data.msg, {
+          appearance: 'error',
+          autoDismiss: true,
+        });
       })
       .catch(function (error) {
         console.log(error);

@@ -4,10 +4,12 @@ import { Card, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Prompt, Confirm } from "react-st-modal";
+import { useToasts } from "react-toast-notifications";
 import axios from "axios";
 const APIURL = process.env.REACT_APP_APIURL;
 
 const CardItem = function ({ cardID, content, isActiveCard, color }) {
+  const { addToast } = useToasts();
   let [contentCard, setContentCard] = useState("");
   let [isActive, setIsActive] = useState("");
 
@@ -32,7 +34,10 @@ const CardItem = function ({ cardID, content, isActiveCard, color }) {
         if (response.data.status === 1)
           setContentCard(response.data.card.content);
         else {
-          alert(response.data.msg.message);
+          addToast(response.data.msg.message, {
+            appearance: "error",
+            autoDismiss: true,
+          });
         }
       })
       .catch(function (error) {
@@ -55,7 +60,10 @@ const CardItem = function ({ cardID, content, isActiveCard, color }) {
         if (response.data.status === 1)
           setIsActive(response.data.card.isActive);
         else {
-          alert(response.data.msg.message);
+          addToast(response.data.msg.message, {
+            appearance: "error",
+            autoDismiss: true,
+          });
         }
       })
       .catch(function (error) {
