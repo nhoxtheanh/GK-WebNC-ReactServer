@@ -90,6 +90,7 @@ export default function LoginPage() {
           </a>
         </div>
       </form>
+          <a href="https://github.com/nhoxtheanh/GK-WebNC-ReactServer" className="github-link">Visit my Github</a>
     </div>
   );
 }
