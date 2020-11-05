@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 //import { StyledHeader } from './styles';
 import Navbar from 'react-bootstrap/Navbar'
 import {Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 export const Header = () => {
   let fullname = localStorage.getItem("fullname");
@@ -38,7 +39,7 @@ export const Header = () => {
             <Button variant="outline-success">Search</Button>
           </Form>
           <div className="greeting">Chào <Button variant="outline-primary" onClick={getProfile}><b>{fullname}</b></Button></div>
-          <a href="/login"><Button variant="info" onClick={logout}>Logout</Button></a>
+          <Link to='/login'><Button variant="info" onClick={logout}>Logout</Button></Link>
         </Navbar.Collapse>
       </Navbar>
       <br/>

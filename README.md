@@ -45,6 +45,7 @@ Frontend:
 - react-bootstrap
 - react-icons
 - react-st-modal
+- react-router-dom
 
 ### Installation
 

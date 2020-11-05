@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignInAlt, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { faFacebookSquare, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import axios from "axios";
+import { Link } from 'react-router-dom'
 const APIURL = process.env.REACT_APP_APIURL;
 
 export default function LoginPage() {
@@ -27,8 +28,7 @@ export default function LoginPage() {
           localStorage.setItem("fullname", response.data.fullname);
           localStorage.setItem("userID", response.data.userID);
           window.location.href = "/dashboard";
-        }
-        else alert(response.data.msg);
+        } else alert(response.data.msg);
       })
       .catch(function (error) {
         console.log(error);
@@ -42,7 +42,8 @@ export default function LoginPage() {
         <div class="social-login">
           <Button className="btn facebook-btn social-btn" type="button">
             <span>
-              <FontAwesomeIcon className="icon" icon={faFacebookSquare} /> with Facebook
+              <FontAwesomeIcon className="icon" icon={faFacebookSquare} /> with
+              Facebook
             </span>
           </Button>
           <Button className="btn google-btn social-btn" type="button">
@@ -82,15 +83,20 @@ export default function LoginPage() {
         </div>
         <hr></hr>
         <div className="btn-container">
-          <a href="/signup">
+          <Link to="/signup">
             <Button className="btn btn-primary btn-block btn-signup">
               <FontAwesomeIcon className="icon" icon={faUserPlus} /> Sign up New
               Account
             </Button>
-          </a>
+          </Link>
         </div>
       </form>
-          <a href="https://github.com/nhoxtheanh/GK-WebNC-ReactServer" className="github-link">Visit my Github</a>
+      <a
+        href="https://github.com/nhoxtheanh/GK-WebNC-ReactServer"
+        className="github-link"
+      >
+        Visit my Github
+      </a>
     </div>
   );
 }

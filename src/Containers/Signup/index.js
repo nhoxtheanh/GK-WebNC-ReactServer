@@ -3,6 +3,7 @@ import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignInAlt, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { Link } from "react-router-dom";
 const APIURL = process.env.REACT_APP_APIURL;
 
 export default function SignupPage() {
@@ -23,12 +24,11 @@ export default function SignupPage() {
       .post(APIURL + "/users/signup", {
         fullname: fullname,
         username: username,
-        password: password
+        password: password,
       })
       .then(function (response) {
         alert(response.data.msg);
-        if(response.data.status === 1)
-          window.location.href = "/login";
+        if (response.data.status === 1) window.location.href = "/login";
       })
       .catch(function (error) {
         console.log(error);
@@ -84,11 +84,11 @@ export default function SignupPage() {
         <hr></hr>
         <div className="text-center">Already have an account?</div>
         <div className="btn-container">
-          <a href="/login">
+          <Link to="/login">
             <Button className="btn btn-primary btn-block btn-signup">
               <FontAwesomeIcon className="icon" icon={faSignInAlt} /> Login
             </Button>
-          </a>
+          </Link>
         </div>
       </form>
     </div>
