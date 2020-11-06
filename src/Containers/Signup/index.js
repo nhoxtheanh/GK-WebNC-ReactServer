@@ -4,11 +4,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignInAlt, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { useToasts } from 'react-toast-notifications';
+import { useToasts } from "react-toast-notifications";
 const APIURL = process.env.REACT_APP_APIURL;
 
 export default function SignupPage() {
   const { addToast } = useToasts();
+  const [isLoading, setLoading] = useState(false);
   const [fullname, setFullname] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -22,6 +23,7 @@ export default function SignupPage() {
 
   function handleSubmit(event) {
     event.preventDefault();
+    setLoading(true);
     axios
       .post(APIURL + "/users/signup", {
         fullname: fullname,
@@ -29,8 +31,9 @@ export default function SignupPage() {
         password: password,
       })
       .then(function (response) {
+        setLoading(false);
         addToast(response.data.msg, {
-          appearance: 'info',
+          appearance: "info",
           autoDismiss: true,
         });
         if (response.data.status === 1) window.location.href = "/login";
@@ -79,11 +82,11 @@ export default function SignupPage() {
         <div className="btn-container">
           <Button
             className="btn btn-success btn-block btn-login"
-            disabled={!validateForm()}
+            disabled={isLoading || !validateForm()}
             type="submit"
           >
             <FontAwesomeIcon className="icon" icon={faUserPlus} />
-            Signup
+            {isLoading ? "Signing up..." : "Signup"}
           </Button>
         </div>
         <hr></hr>

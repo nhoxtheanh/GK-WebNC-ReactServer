@@ -5,8 +5,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FaLink } from "react-icons/fa";
 import { useToasts } from 'react-toast-notifications';
-import { Prompt, Confirm } from "react-st-modal";
+import { Prompt, Confirm, CustomDialog } from "react-st-modal";
 import axios from "axios";
+import ShowBoardURLModal from '../Modals'
 const APIURL = process.env.REACT_APP_APIURL;
 
 const Board = function ({ name, time, boardID, isActiveBoard }) {
@@ -74,6 +75,43 @@ const Board = function ({ name, time, boardID, isActiveBoard }) {
     window.location.href = "/boardDetail/" + boardID;
   }
 
+  function shareBoard(boardID){
+    let host = window.location.protocol + '//' + window.location.hostname;
+    if (window.location.port)
+      host += ":" + window.location.port;
+    axios
+    .post(
+      APIURL + "/sharedBoard",
+      {
+        boardID: boardID,
+        host: host,
+      },
+      {
+        headers: { Authorization: localStorage.getItem("jwtToken") },
+      }
+    )
+    .then(function (response) {
+      if (response.data.status === 1) {
+        const result = CustomDialog(<ShowBoardURLModal URL={response.data.board.sharedURL}/>, {
+          title: 'Nice! Now you can share this URL with your partner',
+        });
+
+        // if (url) {
+        //   deleteBoard();
+        // } 
+      }
+      else {
+        addToast(response.data.msg.message, {
+          appearance: 'error',
+          autoDismiss: true,
+        });
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
   return (
     <div>
       {isActive ? (
@@ -112,7 +150,7 @@ const Board = function ({ name, time, boardID, isActiveBoard }) {
               </Button>
             </Card.Text>
 
-            <Button variant="outline-info" className="btn-shareBoard">
+            <Button variant="outline-info" className="btn-shareBoard" onClick={() => shareBoard(boardID)}>
               <FaLink /> Share link
             </Button>
             <Button

@@ -4,14 +4,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignInAlt, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { faFacebookSquare, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import axios from "axios";
-import { Link } from 'react-router-dom'
-import { useToasts } from 'react-toast-notifications';
+import { Link } from "react-router-dom";
+import { useToasts } from "react-toast-notifications";
 const APIURL = process.env.REACT_APP_APIURL;
 
 export default function LoginPage() {
   const { addToast } = useToasts();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setLoading] = useState(false);
 
   function validateForm() {
     return username.length > 0 && password.length > 0;
@@ -19,22 +20,24 @@ export default function LoginPage() {
 
   function handleSubmit(event) {
     event.preventDefault();
+    setLoading(true);
     axios
       .post(APIURL + "/users/login", {
         username: username,
         password: password,
       })
       .then(function (response) {
+        setLoading(false);
         if (response.data.status === 1) {
           localStorage.setItem("jwtToken", response.data.token);
           localStorage.setItem("fullname", response.data.fullname);
           localStorage.setItem("userID", response.data.userID);
           window.location.href = "/dashboard";
-        } else 
-        addToast(response.data.msg, {
-          appearance: 'error',
-          autoDismiss: true,
-        });
+        } else
+          addToast(response.data.msg, {
+            appearance: "error",
+            autoDismiss: true,
+          });
       })
       .catch(function (error) {
         console.log(error);
@@ -80,11 +83,11 @@ export default function LoginPage() {
         <div className="btn-container">
           <Button
             className="btn btn-success btn-block btn-login"
-            disabled={!validateForm()}
+            disabled={isLoading || !validateForm()}
             type="submit"
           >
             <FontAwesomeIcon className="icon" icon={faSignInAlt} />
-            Login
+            {isLoading ? "Logging in..." : "Login"}
           </Button>
         </div>
         <hr></hr>

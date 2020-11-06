@@ -6,6 +6,7 @@ import SignupPage from '../Signup';
 import BoardDetailPage from '../BoardDetail';
 import UserProfilePage from '../UserProfile';
 import DragdropPage from '../DragDrop';
+import SharedBoardPage from '../SharedBoard';
 
 function BoardDetail() {
   let { boardID } = useParams();
@@ -15,6 +16,11 @@ function BoardDetail() {
 function UserProfile() {
   let { userID } = useParams();
   return <UserProfilePage userID={userID}/>;
+}
+
+function SharedBoard() {
+  let { boardKey } = useParams();
+  return <SharedBoardPage boardKey={boardKey}/>;
 }
 
 export const AppLayout = props => (
@@ -33,6 +39,9 @@ export const AppLayout = props => (
     </Route>
     <Route path="/users/:userID">
       <UserProfile/>
+    </Route>
+    <Route path="/sharedBoard/:boardKey">
+      <SharedBoard/>
     </Route>
     <Route exact path="/dd">
       <DragdropPage />
