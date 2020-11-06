@@ -24,20 +24,22 @@ const dropStyle = {
   margin: "32px",
 };
 
-export default class DragdropPage extends React.Component {
-  render() {
-    return (
-      <Wrapper>
-        <Drop id="drop1" style={dropStyle}>
-          <Drag id="drag1" style={{ margin: "8px" }}>
-            <Item>item 1</Item>
-          </Drag>
-          <Drag id="drag2" style={{ margin: "8px" }}>
-            <Item>item 2</Item>
-          </Drag>
-        </Drop>
-        <Drop id="drop2" style={dropStyle}></Drop>
-      </Wrapper>
-    );
-  }
+export default function DragdropPage() {
+  return (
+    <Wrapper>
+      <Drop id="drop1" style={dropStyle}>
+        <Drag id="drag1" style={{ margin: "8px" }}>
+          <Item>item 1</Item>
+        </Drag>
+        <Drag id="drag2" style={{ margin: "8px" }}>
+          <Item>item 2</Item>
+        </Drag>
+      </Drop>
+      <Drop id="drop2" style={dropStyle}>
+        <Drag id="drag3" style={{ margin: "8px" }}>
+          <Item>item 3</Item>
+        </Drag>
+      </Drop>
+    </Wrapper>
+  );
 }
