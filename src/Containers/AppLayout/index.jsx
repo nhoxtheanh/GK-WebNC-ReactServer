@@ -5,6 +5,7 @@ import LoginPage from '../Login';
 import SignupPage from '../Signup';
 import BoardDetailPage from '../BoardDetail';
 import UserProfilePage from '../UserProfile';
+import DragdropPage from '../DragDrop';
 
 function BoardDetail() {
   let { boardID } = useParams();
@@ -32,6 +33,9 @@ export const AppLayout = props => (
     </Route>
     <Route path="/users/:userID">
       <UserProfile/>
+    </Route>
+    <Route exact path="/dd">
+      <DragdropPage />
     </Route>
     <Redirect to="/login" /> {/* khi vào trang ko xác định sẽ redirect về /dashboard */}
   </Switch>
