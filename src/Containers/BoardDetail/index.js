@@ -10,7 +10,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Prompt, Alert as AlertModal } from "react-st-modal";
 import Alert from "react-bootstrap/Alert";
 import { useToasts } from "react-toast-notifications";
-import moment from "moment";
+import "./index.css";
 const APIURL = process.env.REACT_APP_APIURL;
 
 const BoardDetailPage = function ({ boardID }) {
