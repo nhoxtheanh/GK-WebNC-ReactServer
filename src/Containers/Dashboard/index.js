@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import CommonLayout from "../AppLayout/CommonLayout";
+import FilterLayout from "../AppLayout/FilterLayout";
 import { Card, Button, Form, FormControl } from "react-bootstrap";
 import axios from "axios";
 //import Title from 'app/components/Title';
@@ -17,6 +17,7 @@ const Dashboard = (props) => {
   const { addToast } = useToasts();
   // const { handlers, selectors } = useHooks()
   let [boards, setBoards] = useState([]);
+  //let [filter, setFilter] = useState("")
   let [fullBoards, setFullBoards] = useState([]);
 
   useEffect(() => {
@@ -31,8 +32,8 @@ const Dashboard = (props) => {
       })
       .then(function (response) {
         if (response.data.status === 1) {
-          setBoards(response.data.allBoards);
           setFullBoards(response.data.allBoards);
+          setBoards(response.data.allBoards);
         }
         else {
           addToast("Forbidden Error: You don't have permission!", {
@@ -73,15 +74,14 @@ const Dashboard = (props) => {
       });
   }
 
-  function checkFiltering(e) {
-    if (e.target.value) onFiltering(e);
+  const callbackFunction = (filterdData) => {
+    if (filterdData) onFiltering(filterdData);
     else  outFiltering();
   }
 
-  function onFiltering(e) {
-    let filterValue = e.target.value;
+  function onFiltering(filterdData) {
     const filteredBoards = boards.filter(function (el) {
-      return (el.name.toLowerCase().indexOf(filterValue.toLowerCase()) !== -1) && (el.isActive == true);
+      return (el.name.toLowerCase().indexOf(filterdData.toLowerCase()) !== -1) && (el.isActive == true);
     });
     setBoards(filteredBoards);
   }
@@ -90,19 +90,10 @@ const Dashboard = (props) => {
     setBoards(fullBoards);
   }
 
+
   return (
-    <CommonLayout>
+    <FilterLayout parentCallback={callbackFunction}>
       <div className="dashboardPage">
-        <Form inline className="searchForm input-group col-lg-4">
-          <FormControl
-            type="text"
-            placeholder="Search"
-            className="mr-sm-2"
-            id="filter-input"
-            onChange={(e) => {checkFiltering(e);}}
-          />
-          <Button variant="outline-success">Search</Button>
-        </Form>
         <div className="boardsList">
           {" "}
           <Button
@@ -150,7 +141,7 @@ const Dashboard = (props) => {
           )}
         </div>
       </div>
-    </CommonLayout>
+    </FilterLayout>
   );
 };
 

@@ -23,6 +23,7 @@ function SharedBoard() {
   return <SharedBoardPage boardKey={boardKey}/>;
 }
 
+
 export const AppLayout = props => (
   <Switch>
     <Route path="/dashboard"> {/* khai báo route khi truy cập đến URL /dashboard */}
