@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CommonLayout from "../AppLayout/CommonLayout";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Form, FormControl } from "react-bootstrap";
 import axios from "axios";
 //import Title from 'app/components/Title';
 import Board from "../../Components/Boards";
@@ -17,6 +17,8 @@ const Dashboard = (props) => {
   const { addToast } = useToasts();
   // const { handlers, selectors } = useHooks()
   let [boards, setBoards] = useState([]);
+  let [fullBoards, setFullBoards] = useState([]);
+
   useEffect(() => {
     fetchBoards();
   }, []);
@@ -28,7 +30,10 @@ const Dashboard = (props) => {
         headers: { Authorization: localStorage.getItem("jwtToken") },
       })
       .then(function (response) {
-        if (response.data.status === 1) setBoards(response.data.allBoards);
+        if (response.data.status === 1) {
+          setBoards(response.data.allBoards);
+          setFullBoards(response.data.allBoards);
+        }
         else {
           addToast("Forbidden Error: You don't have permission!", {
             appearance: "error",
@@ -68,9 +73,36 @@ const Dashboard = (props) => {
       });
   }
 
+  function checkFiltering(e) {
+    if (e.target.value) onFiltering(e);
+    else  outFiltering();
+  }
+
+  function onFiltering(e) {
+    let filterValue = e.target.value;
+    const filteredBoards = boards.filter(function (el) {
+      return (el.name.toLowerCase().indexOf(filterValue.toLowerCase()) !== -1) && (el.isActive == true);
+    });
+    setBoards(filteredBoards);
+  }
+
+  function outFiltering() {
+    setBoards(fullBoards);
+  }
+
   return (
     <CommonLayout>
       <div className="dashboardPage">
+        <Form inline className="searchForm input-group col-lg-4">
+          <FormControl
+            type="text"
+            placeholder="Search"
+            className="mr-sm-2"
+            id="filter-input"
+            onChange={(e) => {checkFiltering(e);}}
+          />
+          <Button variant="outline-success">Search</Button>
+        </Form>
         <div className="boardsList">
           {" "}
           <Button
