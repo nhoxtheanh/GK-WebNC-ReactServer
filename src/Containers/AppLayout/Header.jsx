@@ -21,7 +21,17 @@ export const Header = () => {
   return (
     <header>
       <Navbar bg="light" expand="lg">
-        <Navbar.Brand href="/dashboard">React-Bootstrap</Navbar.Brand>
+        <Navbar.Brand href="/dashboard">
+          <span className="brand-red">
+            Re
+          </span>
+          <span className="brand-min">
+            min
+          </span>
+          <span className="brand-red">
+            d
+          </span>
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">

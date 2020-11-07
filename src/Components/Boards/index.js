@@ -4,10 +4,10 @@ import { Card, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FaLink } from "react-icons/fa";
-import { useToasts } from 'react-toast-notifications';
+import { useToasts } from "react-toast-notifications";
 import { Prompt, Confirm, CustomDialog } from "react-st-modal";
 import axios from "axios";
-import ShowBoardURLModal from '../Modals'
+import ShowBoardURLModal from "../Modals";
 const APIURL = process.env.REACT_APP_APIURL;
 
 const Board = function ({ name, time, boardID, isActiveBoard }) {
@@ -36,7 +36,7 @@ const Board = function ({ name, time, boardID, isActiveBoard }) {
         if (response.data.status === 1) setboardName(newBoardName);
         else {
           addToast(response.data.msg.message, {
-            appearance: 'error',
+            appearance: "error",
             autoDismiss: true,
           });
         }
@@ -61,7 +61,7 @@ const Board = function ({ name, time, boardID, isActiveBoard }) {
         if (response.data.status === 1) setIsActive(!isActive);
         else {
           addToast(response.data.msg.message, {
-            appearance: 'error',
+            appearance: "error",
             autoDismiss: true,
           });
         }
@@ -75,41 +75,42 @@ const Board = function ({ name, time, boardID, isActiveBoard }) {
     window.location.href = "/boardDetail/" + boardID;
   }
 
-  function shareBoard(boardID){
-    let host = window.location.protocol + '//' + window.location.hostname;
-    if (window.location.port)
-      host += ":" + window.location.port;
+  function shareBoard(boardID) {
+    let host = window.location.protocol + "//" + window.location.hostname;
+    if (window.location.port) host += ":" + window.location.port;
     axios
-    .post(
-      APIURL + "/sharedBoard",
-      {
-        boardID: boardID,
-        host: host,
-      },
-      {
-        headers: { Authorization: localStorage.getItem("jwtToken") },
-      }
-    )
-    .then(function (response) {
-      if (response.data.status === 1) {
-        const result = CustomDialog(<ShowBoardURLModal URL={response.data.board.sharedURL}/>, {
-          title: 'Nice! Now you can share this URL with your partner',
-        });
+      .post(
+        APIURL + "/sharedBoard",
+        {
+          boardID: boardID,
+          host: host,
+        },
+        {
+          headers: { Authorization: localStorage.getItem("jwtToken") },
+        }
+      )
+      .then(function (response) {
+        if (response.data.status === 1) {
+          const result = CustomDialog(
+            <ShowBoardURLModal URL={response.data.board.sharedURL} />,
+            {
+              title: "Nice! Now you can share this URL with your partner",
+            }
+          );
 
-        // if (url) {
-        //   deleteBoard();
-        // } 
-      }
-      else {
-        addToast(response.data.msg.message, {
-          appearance: 'error',
-          autoDismiss: true,
-        });
-      }
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+          // if (url) {
+          //   deleteBoard();
+          // }
+        } else {
+          addToast(response.data.msg.message, {
+            appearance: "error",
+            autoDismiss: true,
+          });
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   return (
@@ -117,10 +118,30 @@ const Board = function ({ name, time, boardID, isActiveBoard }) {
       {isActive ? (
         <Card className="card" border="dark">
           <Card.Body>
-            <Card.Title>
-              {boardName}
+            <Card.Title>{boardName}</Card.Title>
+            <Card.Subtitle className="mb-2 text-muted">
+              Created at {time}
+            </Card.Subtitle>
+            <Card.Text>
               <Button
-                className="btn-editBoard"
+                variant="light"
+                className="btn-boardDetail"
+                onClick={() => getBoardDetail(boardID)}
+              >
+                Board Detail
+              </Button>
+            </Card.Text>
+            <div class="btn-action-container">
+              <Button
+                variant="outline-info"
+                className="btn-shareBoard"
+                onClick={() => shareBoard(boardID)}
+              >
+                <FaLink /> Share link
+              </Button>
+              <Button
+                variant="outline-primary"
+                className=""
                 onClick={async () => {
                   const newBoardName = await Prompt("Rename Board", {
                     title: "What is your New Board name?",
@@ -136,39 +157,23 @@ const Board = function ({ name, time, boardID, isActiveBoard }) {
               >
                 <FontAwesomeIcon icon={faPen} />
               </Button>
-            </Card.Title>
-            <Card.Subtitle className="mb-2 text-muted">
-              Created at {time}
-            </Card.Subtitle>
-            <Card.Text>
               <Button
-                variant="light"
-                className="btn-boardDetail"
-                onClick={() => getBoardDetail(boardID)}
+                variant="outline-danger"
+                className="btn-deleteBoard"
+                onClick={async () => {
+                  const confirm = await Confirm(
+                    "Are you sure to delete this board?",
+                    "Delete Board"
+                  );
+
+                  if (confirm) {
+                    deleteBoard();
+                  }
+                }}
               >
-                Board Detail
+                <FontAwesomeIcon icon={faTrash} />
               </Button>
-            </Card.Text>
-
-            <Button variant="outline-info" className="btn-shareBoard" onClick={() => shareBoard(boardID)}>
-              <FaLink /> Share link
-            </Button>
-            <Button
-              variant="outline-danger"
-              className="btn-deleteBoard"
-              onClick={async () => {
-                const confirm = await Confirm(
-                  "Are you sure to delete this board?",
-                  "Delete Board"
-                );
-
-                if (confirm) {
-                  deleteBoard();
-                }
-              }}
-            >
-              <FontAwesomeIcon icon={faTrash} />
-            </Button>
+            </div>
           </Card.Body>
         </Card>
       ) : null}

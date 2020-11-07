@@ -20,7 +20,10 @@
   height: 13.125rem;
   margin: 10px;
 }
-
+.dashboardPage .btn-action-container{
+  display: flex;
+  justify-content: space-between;
+}
 .dashboardPage .btn-editBoard {
   position: relative;
   float: right;
@@ -181,8 +184,17 @@ header .searchForm {
   margin-right: 20vw;
 }
 
-header .greeting {
+header .navbar-brand .greeting {
   margin-right: 20px;
+}
+
+.brand-red {
+  font-weight: bold!important;
+  color: red!important;
+}
+
+.brand-min {
+  font-size: 0.9rem!important;font-weight: bold!important;
 }
 
 
@@ -210,6 +222,7 @@ header .greeting {
   float: right;
   margin-left: 1rem;
   margin-right: 1rem;
+  background-color: transparent;
 }
 
 .github-link {

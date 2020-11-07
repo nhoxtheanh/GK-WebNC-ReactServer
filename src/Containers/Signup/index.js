@@ -46,7 +46,11 @@ export default function SignupPage() {
   return (
     <div className="signupPage">
       <form onSubmit={handleSubmit}>
-        <h1 className="h3 mb-3 font-weight-normal text-center">Signup</h1>
+        <h1 className="h3 mb-3 font-weight-normal text-center">
+          Signup to <span className="brand-red">Re</span>
+          <span className="brand-min">min</span>
+          <span className="brand-red">d</span>
+        </h1>
         <FormGroup controlId="fullname" bsSize="large">
           <FormLabel>Fullname</FormLabel>
           <FormControl

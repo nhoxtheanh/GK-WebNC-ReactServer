@@ -47,7 +47,11 @@ export default function LoginPage() {
   return (
     <div className="loginPage">
       <form onSubmit={handleSubmit}>
-        <h1 className="h3 mb-3 font-weight-normal text-center">Login</h1>
+        <h1 className="h3 mb-3 font-weight-normal text-center">
+          Login to <span className="brand-red">Re</span>
+          <span className="brand-min">min</span>
+          <span className="brand-red">d</span>
+        </h1>
         <div class="social-login">
           <Button className="btn facebook-btn social-btn" type="button">
             <span>

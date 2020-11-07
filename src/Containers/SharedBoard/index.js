@@ -9,13 +9,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Prompt, Alert as AlertModal } from "react-st-modal";
 import Alert from "react-bootstrap/Alert";
-import { useToasts } from 'react-toast-notifications';
+import { useToasts } from "react-toast-notifications";
 import moment from "moment";
 const APIURL = process.env.REACT_APP_APIURL;
 
 const SharedBoardPage = function ({ boardKey }) {
   const { addToast } = useToasts();
   let [columns, setColumns] = useState([]);
+  let [boardName, setBoardName] = useState();
+
   useEffect(() => {
     fetchColumns();
   }, []);
@@ -26,8 +28,10 @@ const SharedBoardPage = function ({ boardKey }) {
         headers: { Authorization: localStorage.getItem("jwtToken") },
       })
       .then(function (response) {
-        if (response.data.status === 1) setColumns(response.data.boardDetails);
-        else {
+        if (response.data.status === 1) {
+          setColumns(response.data.boardDetails);
+          setBoardName(response.data.boardName);
+        } else {
           addToast("Forbidden Error: You don't have permission!", {
             appearance: "error",
             autoDismiss: true,
@@ -39,10 +43,10 @@ const SharedBoardPage = function ({ boardKey }) {
       });
   }
 
-
   return (
     <CommonLayout>
       <div className="boardDetailPage">
+      <h1 className="title" style={{marginLeft: '2rem'}}>{boardName}</h1>
         <div className="columnsList">
           {columns.length ? (
             columns.map(({ _id, name, color, isActive, columnID }) => (
@@ -55,9 +59,7 @@ const SharedBoardPage = function ({ boardKey }) {
               />
             ))
           ) : (
-            <Alert variant="warning">
-              There are no column yet
-            </Alert>
+            <Alert variant="warning">There are no column yet</Alert>
           )}
         </div>
       </div>
