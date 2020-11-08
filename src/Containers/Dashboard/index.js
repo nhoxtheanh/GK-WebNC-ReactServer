@@ -34,8 +34,7 @@ const Dashboard = (props) => {
         if (response.data.status === 1) {
           setFullBoards(response.data.allBoards);
           setBoards(response.data.allBoards);
-        }
-        else {
+        } else {
           addToast("Forbidden Error: You don't have permission!", {
             appearance: "error",
             autoDismiss: true,
@@ -76,12 +75,15 @@ const Dashboard = (props) => {
 
   const callbackFunction = (filterdData) => {
     if (filterdData) onFiltering(filterdData);
-    else  outFiltering();
-  }
+    else outFiltering();
+  };
 
   function onFiltering(filterdData) {
     const filteredBoards = boards.filter(function (el) {
-      return (el.name.toLowerCase().indexOf(filterdData.toLowerCase()) !== -1) && (el.isActive == true);
+      return (
+        el.name.toLowerCase().indexOf(filterdData.toLowerCase()) !== -1 &&
+        el.isActive == true
+      );
     });
     setBoards(filteredBoards);
   }
@@ -90,12 +92,28 @@ const Dashboard = (props) => {
     setBoards(fullBoards);
   }
 
-
   return (
     <FilterLayout parentCallback={callbackFunction}>
       <div className="dashboardPage">
         <div className="boardsList">
-          {" "}
+          {boards.length ? (
+            boards.map(({ _id, name, createdAt, isActive, boardID }) => (
+              <Board
+                key={_id}
+                name={name}
+                time={moment(createdAt).format("D MMMM")}
+                boardID={boardID}
+                isActiveBoard={isActive}
+              />
+            ))
+          ) : (
+            <Alert variant="warning">
+              <br></br>
+              <br></br>
+              <br></br>
+              Click&nbsp;to&nbsp;create&nbsp;your&nbsp;first&nbsp;board&nbsp;🡆
+            </Alert>
+          )}{" "}
           <Button
             variant="outline-warning"
             className="add-button"
@@ -121,24 +139,6 @@ const Dashboard = (props) => {
             <br></br>
             <span>Add board</span>
           </Button>
-          {boards.length ? (
-            boards.map(({ _id, name, createdAt, isActive, boardID }) => (
-              <Board
-                key={_id}
-                name={name}
-                time={moment(createdAt).format("D MMMM")}
-                boardID={boardID}
-                isActiveBoard={isActive}
-              />
-            ))
-          ) : (
-            <Alert variant="warning">
-              <br></br>
-              <br></br>
-              <br></br>
-              ←&nbsp;click&nbsp;to&nbsp;create&nbsp;your&nbsp;first&nbsp;board
-            </Alert>
-          )}
         </div>
       </div>
     </FilterLayout>
