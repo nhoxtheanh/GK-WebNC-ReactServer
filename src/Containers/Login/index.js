@@ -6,9 +6,12 @@ import { faFacebookSquare, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useToasts } from "react-toast-notifications";
+import ReactDOM from 'react-dom';
 import FacebookLogin from "react-facebook-login";
+import GoogleLogin from 'react-google-login';
 const APIURL = process.env.REACT_APP_APIURL;
 const APPID_FB = process.env.REACT_APP_APPID_FB;
+const APPID_GG = process.env.REACT_APP_APPID_GG;
 
 export default function LoginPage() {
   const { addToast } = useToasts();
@@ -74,6 +77,34 @@ export default function LoginPage() {
       });
   };
 
+  const responseGoogle = (response) => {
+    const username = response.profileObj.googleId; // lấy id của gg làm username
+    const fullname = response.profileObj.name;
+    const email = response.profileObj.email;
+    axios
+      .post(APIURL + "/users/auth/google", {
+        username: username,
+        fullname: fullname,
+        email: email,
+      })
+      .then(function (response) {
+        setLoading(false);
+        if (response.data.status === 1) {
+          localStorage.setItem("jwtToken", response.data.token);
+          localStorage.setItem("fullname", response.data.fullname);
+          localStorage.setItem("userID", response.data.userID);
+          window.location.href = "/dashboard";
+        } else
+          addToast(response.data.msg, {
+            appearance: "error",
+            autoDismiss: true,
+          });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   return (
     <div className="loginPage">
       <form onSubmit={handleSubmit}>
@@ -91,11 +122,15 @@ export default function LoginPage() {
             cssClass="btnFacebook"
             textButton = "with Facebook"
           />
-          <Button className="btn google-btn social-btn" type="button">
-            <span>
-              <FontAwesomeIcon className="icon" icon={faGoogle} /> with Google
-            </span>
-          </Button>
+          <GoogleLogin
+            clientId={APPID_GG}
+            buttonText="with Google"
+            onSuccess={responseGoogle}
+            cookiePolicy={'single_host_origin'}
+            icon={<FontAwesomeIcon className="icon" icon={faGoogle} />}
+            className="btnGoogle"
+            textButton = "with Google"
+          />
         </div>
         <p className="text-center" style={{ marginTop: "1rem" }}>
           OR
