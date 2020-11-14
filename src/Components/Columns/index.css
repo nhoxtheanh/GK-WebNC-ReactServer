@@ -46,3 +46,7 @@ header .searchForm {
 header .greeting {
   margin-right: 20px;
 }
+
+header #profile-dropdown {
+  margin-right: 50px;
+}

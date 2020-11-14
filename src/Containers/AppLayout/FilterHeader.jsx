@@ -58,8 +58,11 @@ export const FilterHeader = (props) => {
           />
           <Button variant="outline-success">Search</Button>
         </Form>
-          <div className="greeting">Chào <Button variant="outline-primary" onClick={getProfile}><b>{fullname}</b></Button></div>
-          <Link to='/login'><Button variant="info" onClick={logout}>Logout</Button></Link>
+          <NavDropdown title="Account" id="profile-dropdown">
+                <NavDropdown.Item onClick={getProfile}>Profile</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href='/login' onClick={logout}>Logout</NavDropdown.Item>
+            </NavDropdown>
         </Navbar.Collapse>
       </Navbar>
       <br/>
