@@ -44,6 +44,28 @@ export default function LoginPage() {
       });
   }
 
+  function loginFacebook() {
+    setLoading(true);
+    axios
+      .get(APIURL + "/auth/facebook")
+      .then(function (response) {
+        setLoading(false);
+        if (response.data.status === 1) {
+          localStorage.setItem("jwtToken", response.data.token);
+          localStorage.setItem("fullname", response.data.fullname);
+          localStorage.setItem("userID", response.data.userID);
+          window.location.href = "/dashboard";
+        } else
+          addToast(response.data.msg, {
+            appearance: "error",
+            autoDismiss: true,
+          });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   return (
     <div className="loginPage">
       <form onSubmit={handleSubmit}>
@@ -53,11 +75,11 @@ export default function LoginPage() {
           <span className="brand-red">d</span>
         </h1>
         <div class="social-login">
-          <Button className="btn facebook-btn social-btn" type="button">
-            <span>
-              <FontAwesomeIcon className="icon" icon={faFacebookSquare} /> with
-              Facebook
-            </span>
+          <Button className="btn facebook-btn social-btn" type="button" onClick={loginFacebook}>
+              <span>
+                <FontAwesomeIcon className="icon" icon={faFacebookSquare} /> with
+                Facebook
+              </span>
           </Button>
           <Button className="btn google-btn social-btn" type="button">
             <span>
