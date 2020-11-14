@@ -233,3 +233,15 @@ header #profile-dropdown {
 .github-link {
   float: right
 }
+
+.btnFacebook { 
+  width: 165px;
+  height:55px;  
+  border-radius: 4px;
+  background: #3b5998;
+  color:white;
+  border:0px transparent;  
+  text-align: center;
+  margin:5px;
+  display: inline-block;
+}

@@ -6,7 +6,9 @@ import { faFacebookSquare, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useToasts } from "react-toast-notifications";
+import FacebookLogin from "react-facebook-login";
 const APIURL = process.env.REACT_APP_APIURL;
+const APPID_FB = process.env.REACT_APP_APPID_FB;
 
 export default function LoginPage() {
   const { addToast } = useToasts();
@@ -44,10 +46,16 @@ export default function LoginPage() {
       });
   }
 
-  function loginFacebook() {
-    setLoading(true);
+  const responseFacebook = (response) => {
+    const username = response.id; // lấy id của fb làm username
+    const fullname = response.name;
+    const email = response.email;
     axios
-      .get(APIURL + "/auth/facebook")
+      .post(APIURL + "/users/auth/facebook", {
+        username: username,
+        fullname: fullname,
+        email: email,
+      })
       .then(function (response) {
         setLoading(false);
         if (response.data.status === 1) {
@@ -64,7 +72,7 @@ export default function LoginPage() {
       .catch(function (error) {
         console.log(error);
       });
-  }
+  };
 
   return (
     <div className="loginPage">
@@ -75,12 +83,14 @@ export default function LoginPage() {
           <span className="brand-red">d</span>
         </h1>
         <div class="social-login">
-          <Button className="btn facebook-btn social-btn" type="button" onClick={loginFacebook}>
-              <span>
-                <FontAwesomeIcon className="icon" icon={faFacebookSquare} /> with
-                Facebook
-              </span>
-          </Button>
+          <FacebookLogin
+            appId={APPID_FB}
+            fields="id,name,email"
+            callback={responseFacebook}
+            icon={<FontAwesomeIcon className="icon" icon={faFacebookSquare} />}
+            cssClass="btnFacebook"
+            textButton = "with Facebook"
+          />
           <Button className="btn google-btn social-btn" type="button">
             <span>
               <FontAwesomeIcon className="icon" icon={faGoogle} /> with Google
