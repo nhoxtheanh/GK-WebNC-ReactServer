@@ -1,0 +1,64 @@
+ReactJS
+https://reactjs.org/
+
+Initial Nodejs & Express
+https://viblo.asia/p/tao-ung-dung-hello-world-voi-nodejs-va-express-63vKjQ1R52R
+https://viblo.asia/p/huong-dan-co-ban-su-dung-npm-nhu-mot-build-tool-part-1-4dbZN0qk5YM
+
+Kết nối MongoDB
+https://freetuts.net/ket-noi-voi-mongodb-trong-nodejs-2296.html
+
+Mongoose Schema
+https://freetuts.net/mongoose-trong-nodejs-2307.html
+
+Cài đặt MongoDB
+https://www.codehub.com.vn/Huong-Dan-Cai-Dat-MongoDB
+
+Import và Export cơ sở dữ liệu MongoDB
+https://o7planning.org/vi/10279/import-va-export-co-so-du-lieu-mongodb
+
+DEPLOY
+https://viblo.asia/p/cach-tao-va-deploy-mot-ung-dung-don-gian-len-heroku-Az45bAjOlxY
+
+lỗi nhận diện react thành nodejs khi deploy
+https://stackoverflow.com/questions/61558585/heroku-content-not-from-webpack-is-served-from-app-public-despite-using-all-d
+
+json server
+https://topdev.vn/blog/cach-tao-rest-api-voi-json-server/?utm_source=facebook&utm_medium=ltvcfs_page&utm_campaign=blog&fbclid=IwAR3x1T8W8brY6o0AP_LCS8gFejY0JTZrjlhJKIVZL-_nhMrMoaSVO-UD7SM
+
+
+passport - jwt
+https://www.youtube.com/watch?v=cu1-YC5bCe0
+https://viblo.asia/p/authentication-dung-passport-va-jwt-trong-express-node-js-vyDZOxQ7lwj
+
+tạo trang login trên react, dùng react bootstrap
+https://serverless-stack.com/chapters/create-a-login-page.html
+template trang login
+https://bootsnipp.com/snippets/GavAo
+
+dùng font awesome với react
+https://fontawesome.com/how-to-use/on-the-web/using-with/react
+** tên icon: facebook-square => faFacebookSquare
+
+dùng jwt ở react, nhưng 2 cái tutorial này chẳng có ích gì
+https://jasonwatmore.com/post/2019/04/06/react-jwt-authentication-tutorial-example
+https://bezkoder.com/react-jwt-auth/
+
+Modal React
+https://nodlik.github.io/react-st-modal/
+
+Drag drop item
+https://www.youtube.com/watch?v=j8IlGnKOb6E
+
+
+!!Đăng nhập bằng facebook
+{	ĐĂNG NHẬP FACEBOOK Ở NODE SERVER
+===>> https://www.youtube.com/watch?v=6aoJcB9_DuU
+https://codetheworld.io/xac-thuc-dang-nhap-bang-passport-facebook.html
+** truyền req sang callback sau khi Authen (passReqToCallback)
+https://stackoverrun.com/vi/q/11869148
+????https://stackoverflow.com/questions/34746132/how-to-handle-passport-facebook-callback-in-angular-client
+}
+{	ĐĂNG NHẬP FACEBOOK Ở REACT CLIENT
+https://medium.com/recraftrelic/login-with-facebook-and-google-in-reactjs-990d818d5dab
+}

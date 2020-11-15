@@ -50,6 +50,7 @@ export default function LoginPage() {
   }
 
   const responseFacebook = (response) => {
+    setLoading(true);
     const username = response.id; // lấy id của fb làm username
     const fullname = response.name;
     const email = response.email;
@@ -78,6 +79,7 @@ export default function LoginPage() {
   };
 
   const responseGoogle = (response) => {
+    setLoading(true);
     const username = response.profileObj.googleId; // lấy id của gg làm username
     const fullname = response.profileObj.name;
     const email = response.profileObj.email;

@@ -33,6 +33,7 @@ nhau
 #### Các thư viện chính
 
 Backend:
+- mongoose
 - cors
 - dotenv
 - jsonwebtoken
@@ -47,6 +48,9 @@ Frontend:
 - react-st-modal
 - react-router-dom
 - react-toast-notifications
+- react-copy-to-clipboard
+- react-facebook-login
+- react-google-login
 
 ### Installation
 
@@ -56,3 +60,6 @@ $ npm start
 ```
 ### Ảnh minh họa 
 *https://photos.app.goo.gl/AUW2Vjr1W3fWHAvJ7*
+
+### Video demo
+*https://youtu.be/GZYXGJdggbw*
